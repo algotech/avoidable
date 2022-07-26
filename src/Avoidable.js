@@ -77,7 +77,7 @@ const Avoidable = ({
 
   React.useEffect(() => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-  }, [keyboardUp]);
+  }, [keyboardUp, focusedField]);
 
   const getStyles = () => {
     let itemPosition = 0;
