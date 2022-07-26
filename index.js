@@ -1,3 +1,3 @@
-import Avoidable from './src/Avoidable';
+import Avoidable from './src';
 
 export { Avoidable };
