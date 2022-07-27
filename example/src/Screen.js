@@ -9,8 +9,25 @@ export default function Screen() {
     <View style={styles.container} >
       <Avoidable
         focusTo="input"
+        contextAware={true}
       >
           <View style={styles.spacer} />
+          <TextInput
+            placeholder="Email"
+            keyboardType="email-address"
+            returnKeyType="next"
+            placeholderTextColor="#aaa"
+            style={styles.input}
+          />
+          <View style={styles.spacer.small} />
+          <TextInput
+            placeholder="Email"
+            keyboardType="email-address"
+            returnKeyType="next"
+            placeholderTextColor="#aaa"
+            style={styles.input}
+          />
+          <View style={styles.spacer.small} />
           <TextInput
             placeholder="Email"
             keyboardType="email-address"
@@ -51,6 +68,7 @@ export default function Screen() {
             style={styles.input}
           />
           <View style={styles.spacer.small} />
+          <View style={{flex: 0.8}} />
           <Button
             title="Log In"
             style={styles.button}
