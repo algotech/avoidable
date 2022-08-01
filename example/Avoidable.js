@@ -35,7 +35,8 @@ const Avoidable = ({
   scrollViewProps,
   appSpacing = AVOIDABLE_APP_SPACING,
   safeMarginContentHeight = SAFE_MARGIN_CONTENT_HEIGHT,
-  safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM
+  safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM,
+  contextAware = false,
 }) => {
   const [keyboardHeight, setKeyboardHeight] = React.useState(0);
   const [keyboardUp, setKeyboardUp] = React.useState(false);
@@ -81,7 +82,8 @@ const Avoidable = ({
 
   const getStyles = () => {
     let itemPosition = 0;
-    let doesFitScreen = true;
+    let doesFitScreen = false;
+    let shouldMove = !contextAware;
     const safeAreaScreenHeight = Platform.OS === 'ios' ?
       screenHeight - keyboardHeight :
       safeAreaHeight;
@@ -105,7 +107,11 @@ const Avoidable = ({
       layoutMap[focusedField]?.height || 0;
     }
 
-    if (keyboardUp) {
+    if (itemPosition > safeAreaScreenHeight) {
+      shouldMove = true;
+    }
+
+    if (keyboardUp && shouldMove) {
       return StyleSheet.create({
         width: '100%',
         minHeight: safeAreaScreenHeight,
@@ -196,6 +202,7 @@ Avoidable.propTypes = {
   containerStyle: PropTypes.object,
   focusTo: PropTypes.oneOf(['input', 'bottom']),
   scrollViewProps: PropTypes.object,
+  contextAware: PropTypes.bool,
 };
 
 export default Avoidable;
