@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
-let contentOffset = 0;
 const AVOIDABLE_APP_SPACING = 12;
 const SAFE_MARGIN_CONTENT_HEIGHT = 70;
 const SAFE_MARGIN_SCROLLVIEW_BOTTOM = 60;
@@ -35,12 +34,14 @@ const Avoidable = ({
   scrollViewProps,
   appSpacing = AVOIDABLE_APP_SPACING,
   safeMarginContentHeight = SAFE_MARGIN_CONTENT_HEIGHT,
-  safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM
+  safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM,
+  contextAware = false,
 }) => {
   const [keyboardHeight, setKeyboardHeight] = React.useState(0);
   const [keyboardUp, setKeyboardUp] = React.useState(false);
   const [focusedField, setFocusedField] = React.useState();
   const [layoutMap, setLayoutMap] = React.useState({});
+  const [contentOffset, setContentOffset] = React.useState(0);
   let subscriptions = [];
   const { height: safeAreaHeight } = useSafeAreaFrame();
 
@@ -82,6 +83,7 @@ const Avoidable = ({
   const getStyles = () => {
     let itemPosition = 0;
     let doesFitScreen = true;
+    let shouldMove = !contextAware;
     const safeAreaScreenHeight = Platform.OS === 'ios' ?
       screenHeight - keyboardHeight :
       safeAreaHeight;
@@ -90,14 +92,15 @@ const Avoidable = ({
       layoutMap[Object.keys(layoutMap).length - 1]?.height +
       safeMarginContentHeight;
 
-    if (safeAreaScreenHeight < contentHeight) {
-      doesFitScreen = false;
-    }
+    // TO BE RECHECKED IF NEEDED
+    // if (safeAreaScreenHeight < contentHeight) {
+    //   // console.log(safeAreaScreenHeight, contentHeight - contentOffset);
+    //   doesFitScreen = false;
+    // }
 
     if (focusTo === 'bottom' || doesFitScreen) {
       itemPosition = layoutMap[Object.keys(layoutMap).length - 1]?.y +
       layoutMap[Object.keys(layoutMap).length - 1]?.height || 0;
-      contentOffset = 0;
     }
 
     if (focusTo === 'input' || !doesFitScreen) {
@@ -105,7 +108,11 @@ const Avoidable = ({
       layoutMap[focusedField]?.height || 0;
     }
 
-    if (keyboardUp) {
+    if (itemPosition + safeMarginBottom - contentOffset > safeAreaScreenHeight) {
+      shouldMove = true;
+    }
+
+    if (keyboardUp && shouldMove) {
       return StyleSheet.create({
         width: '100%',
         minHeight: safeAreaScreenHeight,
@@ -130,7 +137,8 @@ const Avoidable = ({
     }
 
     return StyleSheet.create({
-      height: doesFitScreen ? screenHeight - appSpacing * 2 : null,
+      // TO BE RECHECKED IF NEEDED
+      // height: doesFitScreen ? screenHeight - appSpacing * 2 : null,
       minHeight: doesFitScreen ?
         null :
         screenHeight - appSpacing * 2,
@@ -154,7 +162,7 @@ const Avoidable = ({
           android: 'on-drag',
         })}
         onScroll={(e) => {
-          contentOffset = e.nativeEvent.contentOffset.y;
+          setContentOffset(e.nativeEvent.contentOffset.y);
         }}
         {...scrollViewProps}
       >
@@ -196,6 +204,7 @@ Avoidable.propTypes = {
   containerStyle: PropTypes.object,
   focusTo: PropTypes.oneOf(['input', 'bottom']),
   scrollViewProps: PropTypes.object,
+  contextAware: PropTypes.bool,
 };
 
 export default Avoidable;
