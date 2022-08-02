@@ -76,12 +76,11 @@ This is the main Component. You have to wrap your entire screen with `<Avoidable
 |--|--|--|
 |focusTo| `String` - `'input'` or `'bottom'` | Determines where the focus goes. If `input`, the focused input will be right above the keyboard. If `bottom`, the last component inside `<Avoidable>` (or inside `<Avoidable.Area>`) will be focused right above the keyboard. Default: `input` |
 |contextAware| `Boolean` | If `true`, input will only go above the keyboard if it normally would get covered by the keyboard when opened. Default `true` |
-|containerStyle| `Style` | Container Styles passed to the `ScrollView` |
-|keyboardHiddenContainerStyle| `Style` | Container Styles passed to the `ScrollView`. Applied only when the keyboard is hidden |
-|scrollViewProps| `Object` | Props passed to the `ScrollView`|
+|containerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView` |
+|keyboardHiddenContainerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView`. Applied only when the keyboard is hidden |
+|scrollViewProps| `Object` - [ScrollView Props](https://reactnative.dev/docs/scrollview#props) | Props passed to the `ScrollView`|
 |safeMarginContentHeight| `Number` | Safe Margin to determine if content fits between top of screen and keyboard. |
 |safeMarginBottom| `Number` | Safe Margin between focused input and keyboard |
-
 
 ### `Avoidable.Area`
 
@@ -112,7 +111,7 @@ cd .. && npx react-native run-ios
  />
 ```
 
-*insert gif*
+![FocusToInput](https://user-images.githubusercontent.com/82050258/182376886-3a9c605a-99eb-4ee8-b9cb-7f8e7ac5dc8a.gif)
 
 ### Focus to Input - Context Aware
 
@@ -146,6 +145,3 @@ cd .. && npx react-native run-ios
 ```
 
 *insert gif*
-
-
-
