@@ -11,9 +11,8 @@ import {
 } from 'react-native';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
-const AVOIDABLE_APP_SPACING = 12;
 const SAFE_MARGIN_CONTENT_HEIGHT = 70;
-const SAFE_MARGIN_SCROLLVIEW_BOTTOM = 60;
+const SAFE_MARGIN_SCROLLVIEW_BOTTOM = 0;
 const KEYBOARD_OPEN_EVENTS = [
   'keyboardWillShow',
   'keyboardWillChangeFrame',
@@ -30,12 +29,12 @@ const { height: screenHeight } = Dimensions.get('window');
 const Avoidable = ({
   children,
   containerStyle,
+  keyboardHiddenContainerStyle,
   focusTo = 'input',
   scrollViewProps,
-  appSpacing = AVOIDABLE_APP_SPACING,
   safeMarginContentHeight = SAFE_MARGIN_CONTENT_HEIGHT,
   safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM,
-  contextAware = false,
+  contextAware = true,
 }) => {
   const [keyboardHeight, setKeyboardHeight] = React.useState(0);
   const [keyboardUp, setKeyboardUp] = React.useState(false);
@@ -84,19 +83,18 @@ const Avoidable = ({
     let itemPosition = 0;
     let doesFitScreen = true;
     let shouldMove = !contextAware;
-    const safeAreaScreenHeight = Platform.OS === 'ios' ?
-      screenHeight - keyboardHeight :
-      safeAreaHeight;
-    const contentHeight = layoutMap[Object.keys(layoutMap).length - 1]?.y -
+    let contentHeight = layoutMap[Object.keys(layoutMap).length - 1]?.y -
       layoutMap[focusedField]?.y +
       layoutMap[Object.keys(layoutMap).length - 1]?.height +
       safeMarginContentHeight;
+    const hasArea = Object.values(layoutMap).some(view => view.isArea);
+    const safeAreaScreenHeight = Platform.OS === 'ios' ?
+      screenHeight - keyboardHeight :
+      safeAreaHeight;
 
-    // TO BE RECHECKED IF NEEDED
-    // if (safeAreaScreenHeight < contentHeight) {
-    //   // console.log(safeAreaScreenHeight, contentHeight - contentOffset);
-    //   doesFitScreen = false;
-    // }
+    if (safeAreaScreenHeight < contentHeight) {
+      doesFitScreen = false;
+    }
 
     if (focusTo === 'bottom' || doesFitScreen) {
       itemPosition = layoutMap[Object.keys(layoutMap).length - 1]?.y +
@@ -106,6 +104,12 @@ const Avoidable = ({
     if (focusTo === 'input' || !doesFitScreen) {
       itemPosition = layoutMap[focusedField]?.y +
       layoutMap[focusedField]?.height || 0;
+    }
+
+    if (hasArea) {
+      itemPosition = Object.values(layoutMap).filter(view => view.isArea)[0]?.y +
+        Object.values(layoutMap).filter(view => view.isArea)[0]?.height || 0;
+      contentHeight = Object.values(layoutMap).filter(view => view.isArea)[0]?.height;
     }
 
     if (itemPosition + safeMarginBottom - contentOffset > safeAreaScreenHeight) {
@@ -139,9 +143,10 @@ const Avoidable = ({
     return StyleSheet.create({
       // TO BE RECHECKED IF NEEDED
       // height: doesFitScreen ? screenHeight - appSpacing * 2 : null,
-      minHeight: doesFitScreen ?
-        null :
-        screenHeight - appSpacing * 2,
+      // minHeight: doesFitScreen ?
+      //   null :
+      //   screenHeight - appSpacing * 2,
+      ...keyboardHiddenContainerStyle,
     });
   };
 
@@ -181,6 +186,7 @@ const Avoidable = ({
                   [itemKey]: {
                     y: e.nativeEvent.layout.y,
                     height: e.nativeEvent.layout.height,
+                    isArea: child.type.name === 'Area',
                   },
                 });
               }}
@@ -207,4 +213,4 @@ Avoidable.propTypes = {
   contextAware: PropTypes.bool,
 };
 
-export default Avoidable;
+export { Avoidable };

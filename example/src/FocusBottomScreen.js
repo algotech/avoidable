@@ -13,28 +13,28 @@ export default function FocusBottomScreen() {
         contextAware={false}
         safeMarginBottom={10}
       >
-          <View style={styles.spacer} />
-          <TextInput
-            placeholder="Email"
-            keyboardType="email-address"
-            returnKeyType="next"
-            placeholderTextColor="#aaa"
-            style={styles.input}
-          />
-          <View style={styles.spacer.small} />
-          <TextInput
-            placeholder="Password"
-            keyboardType="email-address"
-            returnKeyType="next"
-            placeholderTextColor="#aaa"
-            style={styles.input}
-          />
-          <View style={styles.spacer.small} />
-          <Button
-            title="Log In"
-            style={styles.button}
-            color="white"
-          />
+        <View style={styles.spacer} />
+        <TextInput
+          placeholder="Email"
+          keyboardType="email-address"
+          returnKeyType="next"
+          placeholderTextColor="#aaa"
+          style={styles.input}
+        />
+        <View style={styles.spacer.small} />
+        <TextInput
+          placeholder="Password"
+          keyboardType="email-address"
+          returnKeyType="next"
+          placeholderTextColor="#aaa"
+          style={styles.input}
+        />
+        <View style={styles.spacer.small} />
+        <Button
+          title="Log In"
+          style={styles.button}
+          color="white"
+        />
       </Avoidable>
     </View>
   );
