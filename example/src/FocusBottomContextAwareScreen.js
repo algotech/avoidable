@@ -11,9 +11,10 @@ export default function FocusInputContextAwareScreen() {
       <Avoidable
         focusTo="bottom"
         contextAware={true}
-        // safeMarginBottom={-980}
+        safeMarginBottom={10}
       >
-          <View style={styles.spacer.big.top} />
+        <View style={styles.spacer.big.top} />
+        <Avoidable.Area>
           <TextInput
             placeholder="Email"
             keyboardType="email-address"
@@ -35,11 +36,8 @@ export default function FocusInputContextAwareScreen() {
             style={styles.button}
             color="white"
           />
-          <View style={{height: 300, backgroundColor: 'black'}} />
-          {/* <View style={styles.spacer.big.bottom} /> */}
-          {/* <View style={styles.spacer.big.bottom} /> */}
-          {/* <View style={styles.spacer.big.bottom} /> */}
-          {/* <View style={styles.spacer.big.bottom} /> */}
+        </Avoidable.Area>
+        <View style={styles.spacer.big.bottom} />
       </Avoidable>
     </View>
   );
