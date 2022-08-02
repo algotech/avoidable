@@ -92,11 +92,15 @@ const Avoidable = ({
       screenHeight - keyboardHeight :
       safeAreaHeight;
 
+    if (hasArea) {
+      contentHeight = Object.values(layoutMap).filter(view => view.isArea)[0]?.height;
+    }
+
     if (safeAreaScreenHeight < contentHeight) {
       doesFitScreen = false;
     }
 
-    if (focusTo === 'bottom' || doesFitScreen) {
+    if (focusTo === 'bottom' && doesFitScreen) {
       itemPosition = layoutMap[Object.keys(layoutMap).length - 1]?.y +
       layoutMap[Object.keys(layoutMap).length - 1]?.height || 0;
     }
@@ -109,7 +113,6 @@ const Avoidable = ({
     if (hasArea) {
       itemPosition = Object.values(layoutMap).filter(view => view.isArea)[0]?.y +
         Object.values(layoutMap).filter(view => view.isArea)[0]?.height || 0;
-      contentHeight = Object.values(layoutMap).filter(view => view.isArea)[0]?.height;
     }
 
     if (itemPosition + safeMarginBottom - contentOffset > safeAreaScreenHeight) {
