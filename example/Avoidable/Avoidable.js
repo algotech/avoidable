@@ -186,7 +186,7 @@ const Avoidable = ({
                   [itemKey]: {
                     y: e.nativeEvent.layout.y,
                     height: e.nativeEvent.layout.height,
-                    isArea: child.type.name === 'Area',
+                    isArea: child.type.isAvoidable,
                   },
                 });
               }}
