@@ -9,7 +9,7 @@ export default function FocusInputContextAwareScreen() {
     <View style={styles.container} >
       <Button back />
       <Avoidable
-        focusTo="input"
+        alignTo="input"
         contextAware={true}
       >
           <View style={styles.spacer.big.top} />

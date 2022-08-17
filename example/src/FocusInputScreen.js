@@ -31,7 +31,7 @@ export default function FocusInputScreen() {
     <View style={styles.container}>
       <Button back />
       <Avoidable
-        focusTo="input"
+        alignTo="input"
         contextAware={false}
       >
         <View style={styles.spacer} />

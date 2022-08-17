@@ -9,7 +9,7 @@ export default function FocusBottomScreen() {
     <View style={styles.container} >
       <Button back />
       <Avoidable
-        focusTo="bottom"  
+        alignTo="bottom"  
         contextAware={false}
         safeMarginBottom={10}
       >
