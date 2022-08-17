@@ -1,16 +1,16 @@
 # Avoidable
 
-Avoidable is a `ScrollView` component to handle Keyboard interaction with `TextInputs`
+Avoidable is a custom package to handle Keyboard interaction with `TextInputs`
 
 ## Motivation
 
-Focusing a single input above the keyboard can be tricky at times, but focusing a whole form is lot more difficult than it should be.
+Getting a single input to show up above the keyboard can be tricky at times, but making a whole form visible at once is lot more difficult than it should be.
 
 ## Solution
 
 Our package aims to improve the way keyboards and inputs are being handled, giving you multiple ways to get the input into a visible spot.
 
-![FocusToInput](https://user-images.githubusercontent.com/82050258/182376886-3a9c605a-99eb-4ee8-b9cb-7f8e7ac5dc8a.gif)
+![AlignToInput](https://user-images.githubusercontent.com/82050258/182376886-3a9c605a-99eb-4ee8-b9cb-7f8e7ac5dc8a.gif)
 
 ## Table of contents
 
@@ -23,10 +23,10 @@ Our package aims to improve the way keyboards and inputs are being handled, givi
 - [Examples](#examples)
   - [Example App](#example-app)
 - [Usage](#usage)
-  - [Focus To Input](#focus-to-input)
-  - [Focus To Input - Context Aware](#focus-to-input---context-aware)
-  - [Focus To Bottom](#focus-to-bottom)
-  - [Focus To Bottom - Context Aware](#focus-to-bottom---context-aware) 
+  - [Align To Input](#align-to-input)
+  - [Align To Input - Context Aware](#align-to-input---context-aware)
+  - [Align To Bottom](#align-to-bottom)
+  - [Align To Bottom - Context Aware](#align-to-bottom---context-aware) 
 
 ## Installation
 
@@ -42,7 +42,7 @@ yarn add avoidable
 
 ## Quick Start
 
-Wrap your form with the Avoidable Component
+Wrap your screen with the Avoidable Component
 
 ```javascript
   <Avoidable>
@@ -52,7 +52,10 @@ Wrap your form with the Avoidable Component
   </Avoidable>
 ```
 
-Or define an area within your Avoidable Component
+Note
+>You have to wrap your entire screen with `<Avoidable>` component in order for it to work as expected.
+
+And/or define an area within your Avoidable Component
 
 ```javascript
  <Avoidable>
@@ -69,22 +72,22 @@ Or define an area within your Avoidable Component
 
 ### `Avoidable`
 
-This is the main Component. You have to wrap your entire screen with `<Avoidable>` component in order for it to work as expected.
+This is the main Component, build around a `ScrollView` component, that should wrap the entire screen it is used on. 
 
 #### Avoidable Props
 |Name|Type|Description|
 |--|--|--|
-|focusTo| `String` - `'input'` or `'bottom'` | Determines where the focus goes. If `input`, the focused input will be right above the keyboard. If `bottom`, the last component inside `<Avoidable>` (or inside `<Avoidable.Area>`) will be focused right above the keyboard. Default: `input` |
+|alignTo| `String` - `'input'` or `'bottom'` | Determines what gets aligned to the keyboard. If `input`, the focused input will be right above the keyboard. If `bottom`, the last component inside `<Avoidable>` (or inside `<Avoidable.Area>`) will be focused right above the keyboard. Default: `input` |
 |contextAware| `Boolean` | If `true`, input will only go above the keyboard if it normally would get covered by the keyboard when opened. Default `true` |
 |containerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView` |
 |keyboardHiddenContainerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView`. Applied only when the keyboard is hidden |
 |scrollViewProps| `Object` - [ScrollView Props](https://reactnative.dev/docs/scrollview#props) | Props passed to the `ScrollView`|
 |safeMarginContentHeight| `Number` | Safe Margin to determine if content fits between top of screen and keyboard. |
-|safeMarginBottom| `Number` | Safe Margin between focused input and keyboard |
+|safeMarginBottom| `Number` | Safe Margin between slected input or form and keyboard |
 
 ### `Avoidable.Area`
 
-This is the component to specify where your form or selection of inputs would be. This is only used with `focusTo` set to `bottom` and is neccesary when `contextAware` is true.
+This is the component to specify where your form or selection of inputs would be. This is only used with `alignTo = 'bottom'` and is neccesary when `contextAware = true`.
 
 ## Examples
 
@@ -102,44 +105,44 @@ cd .. && npx react-native run-ios
 
 ## Usage
 
-### Focus to Input 
+### Align to Input 
 
 ```javascript
  <Avoidable
-  focusTo="input"
+  alignTo="input"
   contextAware={false}
  />
 ```
 
-![FocusToInput](https://user-images.githubusercontent.com/82050258/182376886-3a9c605a-99eb-4ee8-b9cb-7f8e7ac5dc8a.gif)
+![AlignToInput](https://user-images.githubusercontent.com/82050258/182376886-3a9c605a-99eb-4ee8-b9cb-7f8e7ac5dc8a.gif)
 
-### Focus to Input - Context Aware
+### Align to Input - Context Aware
 
 ```javascript
  <Avoidable
-  focusTo="input"
+  alignTo="input"
   contextAware={true}
  />
 ```
 
 *insert gif*
 
-### Focus to Bottom
+### Align to Bottom
 
 ```javascript
  <Avoidable
-  focusTo="bottom"
+  alignTo="bottom"
   contextAware={false}
  />
 ```
 
 *insert gif*
 
-### Focus to Bottom - Context Aware
+### Align to Bottom - Context Aware
 
 ```javascript
  <Avoidable
-  focusTo="bottom"
+  alignTo="bottom"
   contextAware={true}
  />
 ```
