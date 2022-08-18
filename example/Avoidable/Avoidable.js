@@ -30,7 +30,7 @@ const Avoidable = ({
   children,
   containerStyle,
   keyboardHiddenContainerStyle,
-  focusTo = 'input',
+  alignTo = 'input',
   scrollViewProps,
   safeMarginContentHeight = SAFE_MARGIN_CONTENT_HEIGHT,
   safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM,
@@ -100,12 +100,12 @@ const Avoidable = ({
       doesFitScreen = false;
     }
 
-    if (focusTo === 'bottom' && doesFitScreen) {
+    if (alignTo === 'bottom' && doesFitScreen) {
       itemPosition = layoutMap[Object.keys(layoutMap).length - 1]?.y +
       layoutMap[Object.keys(layoutMap).length - 1]?.height || 0;
     }
 
-    if (focusTo === 'input' || !doesFitScreen) {
+    if (alignTo === 'input' || !doesFitScreen) {
       itemPosition = layoutMap[focusedField]?.y +
       layoutMap[focusedField]?.height || 0;
     }
@@ -211,7 +211,7 @@ const Avoidable = ({
 Avoidable.propTypes = {
   children: PropTypes.array.isRequired,
   containerStyle: PropTypes.object,
-  focusTo: PropTypes.oneOf(['input', 'bottom']),
+  alignTo: PropTypes.oneOf(['input', 'bottom']),
   scrollViewProps: PropTypes.object,
   contextAware: PropTypes.bool,
 };
