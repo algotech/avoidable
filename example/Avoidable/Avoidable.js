@@ -27,14 +27,14 @@ const KEYBOARD_CLOSE_EVENTS = [
 const { height: screenHeight } = Dimensions.get('window');
 
 const Avoidable = ({
+  alignTo = 'input',
   children,
   containerStyle,
-  keyboardHiddenContainerStyle,
-  alignTo = 'input',
-  scrollViewProps,
-  safeMarginContentHeight = SAFE_MARGIN_CONTENT_HEIGHT,
-  safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM,
   contextAware = true,
+  keyboardHiddenContainerStyle,
+  safeMarginBottom = SAFE_MARGIN_SCROLLVIEW_BOTTOM,
+  safeMarginContentHeight = SAFE_MARGIN_CONTENT_HEIGHT,
+  scrollViewProps,
 }) => {
   const [keyboardHeight, setKeyboardHeight] = React.useState(0);
   const [keyboardUp, setKeyboardUp] = React.useState(false);
@@ -43,6 +43,10 @@ const Avoidable = ({
   const [contentOffset, setContentOffset] = React.useState(0);
   let subscriptions = [];
   const { height: safeAreaHeight } = useSafeAreaFrame();
+
+  if (!children && __DEV__) {
+    throw new Error('Please add at least one element between the Avoidable tags.');
+  }
 
   const getKeyboardHeight = (e) => {
     if (keyboardHeight > 0) {
@@ -91,6 +95,10 @@ const Avoidable = ({
     const safeAreaScreenHeight = Platform.OS === 'ios' ?
       screenHeight - keyboardHeight :
       safeAreaHeight;
+
+    if (hasArea && (alignTo !== 'bottom' || !contextAware) && __DEV__) {
+      console.warn(`You have defined an Area, but alignTo is not set to 'bottom' and contextAware is not set to true!`);
+    }
 
     if (hasArea) {
       contentHeight = Object.values(layoutMap).filter(view => view.isArea)[0]?.height;
