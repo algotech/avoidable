@@ -82,12 +82,12 @@ This is the main Component, build around a `ScrollView` component, that should w
 |containerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView` |
 |keyboardHiddenContainerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView`. Applied only when the keyboard is hidden |
 |scrollViewProps| `Object` - [ScrollView Props](https://reactnative.dev/docs/scrollview#props) | Props passed to the `ScrollView`|
-|safeMarginContentHeight| `Number` | Safe Margin to determine if content fits between top of screen and keyboard. |
-|safeMarginBottom| `Number` | Safe Margin between slected input or form and keyboard |
+|safeMarginContentHeight| `Number` | Safe Margin to determine if content fits between top of screen and keyboard. `contentHeight` is the height of the elements that are withing the `<Avoidable>` or `<Avoidable.Area>` tags. You might want to fine-tune this so by changing the `safeMarginContentHeight` you can add or subtract from it. Default `0` |
+|safeMarginBottom| `Number` | `safeMarginBottom` is the distance between the keyboard and the desired element that it gets aligned to. If you want to leave some space between the keyboard and your input or form change this. Default `0` |
 
 ### `Avoidable.Area`
 
-This is the component to specify where your form or selection of inputs would be. This is only used with `alignTo = 'bottom'` and is neccesary when `contextAware = true`.
+Only when `contextAware = true` and `alignTo = 'bottom'` must an Area be defined in order for the package to work properly. This is the component to specify where your form or selection of inputs is.
 
 ## Examples
 
@@ -125,7 +125,8 @@ cd .. && npx react-native run-ios
  />
 ```
 
-*insert gif*
+![AlignToInputCA](https://user-images.githubusercontent.com/82050258/186087504-392d4ccd-35a2-4be5-b8f6-2d9b7ba77fbb.gif)
+
 
 ### Align to Bottom
 
@@ -136,7 +137,8 @@ cd .. && npx react-native run-ios
  />
 ```
 
-*insert gif*
+![AlignToBottom](https://user-images.githubusercontent.com/82050258/186087525-263fcd12-14d4-47e6-bd76-437f573cc9ed.gif)
+
 
 ### Align to Bottom - Context Aware
 
@@ -147,4 +149,4 @@ cd .. && npx react-native run-ios
  />
 ```
 
-*insert gif*
+![AlignToBottomCA](https://user-images.githubusercontent.com/82050258/186088066-c64e51d2-cea6-4303-8e1c-886d03e4d6f6.gif)
