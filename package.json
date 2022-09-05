@@ -4,7 +4,7 @@
   "description": "React Native Keyboard Aware component",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "peerDependencies": {
     "prop-types": "^15.7.2",
@@ -27,5 +27,26 @@
   "bugs": {
     "url": "https://github.com/algotech/avoidable/issues"
   },
-  "homepage": "https://github.com/algotech/avoidable#readme"
+  "homepage": "https://github.com/algotech/avoidable#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-flow": "^7.18.6",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/runtime": "^7.18.9",
+    "@testing-library/jest-native": "^4.0.11",
+    "@testing-library/react-native": "^11.0.0",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^28.1.3",
+    "jest": "^28.1.3",
+    "jest-environment-jsdom": "^28.1.3",
+    "react": "17.0.2",
+    "react-native": "0.68.2",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.7.4"
+  }
 }

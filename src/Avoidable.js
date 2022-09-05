@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
+import { getContentHeight, getItemPosition, checkScreenFit } from './helper';
+
 const SAFE_MARGIN_CONTENT_HEIGHT = 70;
 const SAFE_MARGIN_SCROLLVIEW_BOTTOM = 0;
 const KEYBOARD_OPEN_EVENTS = [
@@ -84,44 +86,33 @@ const Avoidable = ({
   }, [keyboardUp, focusedField]);
 
   const getStyles = () => {
-    let itemPosition = 0;
-    let doesFitScreen = true;
-    let shouldMove = !contextAware;
-    let contentHeight = layoutMap[Object.keys(layoutMap).length - 1]?.y -
-      layoutMap[focusedField]?.y +
-      layoutMap[Object.keys(layoutMap).length - 1]?.height +
-      safeMarginContentHeight;
     const hasArea = Object.values(layoutMap).some(view => view.isArea);
-    const safeAreaScreenHeight = Platform.OS === 'ios' ?
-      screenHeight - keyboardHeight :
-      safeAreaHeight;
-
+        
     if (hasArea && (alignTo !== 'bottom' || !contextAware) && __DEV__) {
       console.warn(`When Area is used, alignTo must be "bottom" and contextAware must be true.`);
     }
 
-    if (hasArea) {
-      contentHeight = Object.values(layoutMap).filter(view => view.isArea)[0]?.height;
-    }
-
-    if (safeAreaScreenHeight < contentHeight) {
-      doesFitScreen = false;
-    }
-
-    if (alignTo === 'bottom' && doesFitScreen) {
-      itemPosition = layoutMap[Object.keys(layoutMap).length - 1]?.y +
-      layoutMap[Object.keys(layoutMap).length - 1]?.height || 0;
-    }
-
-    if (alignTo === 'input' || !doesFitScreen) {
-      itemPosition = layoutMap[focusedField]?.y +
-      layoutMap[focusedField]?.height || 0;
-    }
-
-    if (hasArea) {
-      itemPosition = Object.values(layoutMap).filter(view => view.isArea)[0]?.y +
-        Object.values(layoutMap).filter(view => view.isArea)[0]?.height || 0;
-    }
+    const contentHeight = getContentHeight(
+        layoutMap,
+        focusedField,
+        safeMarginContentHeight,
+        hasArea
+      );
+    const safeAreaScreenHeight = Platform.OS === 'ios' ?
+      screenHeight - keyboardHeight :
+      safeAreaHeight;
+    const doesFitScreen = checkScreenFit(
+        safeAreaScreenHeight,
+        contentHeight,
+      );
+    const itemPosition = getItemPosition(
+        alignTo,
+        doesFitScreen,
+        layoutMap,
+        focusedField,
+        hasArea
+      );
+    let shouldMove = !contextAware;
 
     if (itemPosition + safeMarginBottom - contentOffset > safeAreaScreenHeight) {
       shouldMove = true;
@@ -152,11 +143,6 @@ const Avoidable = ({
     }
 
     return StyleSheet.create({
-      // TO BE RECHECKED IF NEEDED
-      // height: doesFitScreen ? screenHeight - appSpacing * 2 : null,
-      // minHeight: doesFitScreen ?
-      //   null :
-      //   screenHeight - appSpacing * 2,
       ...keyboardHiddenContainerStyle,
     });
   };
