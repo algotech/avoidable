@@ -1,5 +1,6 @@
 # Avoidable
 ![test status](https://github.com/algotech/avoidable/actions/workflows/node.js.yml/badge.svg?event=push)
+[![codecov](https://codecov.io/gh/algotech/avoidable/branch/master/graph/badge.svg)](https://codecov.io/gh/algotech/avoidable)
 
 Avoidable is a custom package to handle Keyboard interaction with `TextInputs`
 
