@@ -20,90 +20,92 @@ const MockFocusedField = 1;
 
 const MockSafeMarginContentHeight = 70;
 
-describe('getContentHeight', () => {
-  test('Get Content Height without Area', () => {
-    expect(getContentHeight(
-      MockLayoutMapWithoutArea,
-      MockFocusedField,
-      MockSafeMarginContentHeight,
-      false,
-    )).toEqual(740);
+describe('Avoidable helper', () => {
+  describe('getContentHeight', () => {
+    test('Get Content Height without Area', () => {
+      expect(getContentHeight(
+        MockLayoutMapWithoutArea,
+        MockFocusedField,
+        MockSafeMarginContentHeight,
+        false,
+      )).toEqual(740);
+    });
+
+    test('Get Content Height with Area', () => {
+      expect(getContentHeight(
+        MockLayoutMapWithArea,
+        MockFocusedField,
+        MockSafeMarginContentHeight,
+        true,
+      )).toEqual(150);
+    });
+  })
+
+  describe('getItemPosition', () => {
+    test('Get Item Position with Area and AlignTo Bottom', () => {
+      expect(getItemPosition(
+        'bottom',
+        true,
+        MockLayoutMapWithArea,
+        MockFocusedField,
+        true,
+      )).toEqual(750);
+    });
+
+    test('Get Item Position with Area and AlignTo Input', () => {
+      expect(getItemPosition(
+        'input',
+        true,
+        MockLayoutMapWithArea,
+        MockFocusedField,
+        true,
+      )).toEqual(750);
+    });
+
+    test('Get Item Position with AlignTo Bottom', () => {
+      expect(getItemPosition(
+        'bottom',
+        true,
+        MockLayoutMapWithoutArea,
+        MockFocusedField,
+        false,
+      )).toEqual(1270);
+    });
+
+    test('Get Item Position with AlignTo Input', () => {
+      expect(getItemPosition(
+        'input',
+        true,
+        MockLayoutMapWithoutArea,
+        MockFocusedField,
+        false,
+      )).toEqual(645);
+    });
+
+    test('Get Item Position with AlignTo Bottom but does not fit screen', () => {
+      expect(getItemPosition(
+        'input',
+        false,
+        MockLayoutMapWithoutArea,
+        MockFocusedField,
+        true,
+      )).toEqual(0);
+    });
   });
 
-  test('Get Content Height with Area', () => {
-    expect(getContentHeight(
-      MockLayoutMapWithArea,
-      MockFocusedField,
-      MockSafeMarginContentHeight,
-      true,
-    )).toEqual(150);
-  });
-})
+  describe('checkScreenFit', () => {
+    test('Check if content fits screen', () => {
+      expect(checkScreenFit(
+        508,
+        240,
+      )).toBeTruthy();
+    });
 
-describe('getItemPosition', () => {
-  test('Get Item Position with Area and AlignTo Bottom', () => {
-    expect(getItemPosition(
-      'bottom',
-      true,
-      MockLayoutMapWithArea,
-      MockFocusedField,
-      true,
-    )).toEqual(750);
-  });
-
-  test('Get Item Position with Area and AlignTo Input', () => {
-    expect(getItemPosition(
-      'input',
-      true,
-      MockLayoutMapWithArea,
-      MockFocusedField,
-      true,
-    )).toEqual(750);
-  });
-
-  test('Get Item Position with AlignTo Bottom', () => {
-    expect(getItemPosition(
-      'bottom',
-      true,
-      MockLayoutMapWithoutArea,
-      MockFocusedField,
-      false,
-    )).toEqual(1270);
-  });
-
-  test('Get Item Position with AlignTo Input', () => {
-    expect(getItemPosition(
-      'input',
-      true,
-      MockLayoutMapWithoutArea,
-      MockFocusedField,
-      false,
-    )).toEqual(645);
-  });
-
-  test('Get Item Position with AlignTo Bottom but does not fit screen', () => {
-    expect(getItemPosition(
-      'input',
-      false,
-      MockLayoutMapWithoutArea,
-      MockFocusedField,
-      true,
-    )).toEqual(0);
-  });
-});
-
-describe('checkScreenFit', () => {
-  test('Check if content fits screen', () => {
-    expect(checkScreenFit(
-      508,
-      240,
-    )).toBeTruthy();
-  });
-
-  test('Check if content fits screen', () => {
-    expect(checkScreenFit(
-      508,
-      240,
-    )).toBeTruthy();
-  });
+    test('Check if content does not fit screen', () => {
+      expect(checkScreenFit(
+        508,
+        600,
+      )).toBeFalsy();
+    });
+  })
 })
