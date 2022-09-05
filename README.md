@@ -8,7 +8,7 @@ Getting a single input to show up above the keyboard can be tricky at times, but
 
 ## Solution
 
-Our package aims to improve the way keyboards and inputs are being handled, giving you multiple ways to get the input into a visible spot.
+This package aims to improve the way keyboards and inputs are being handled, giving you multiple ways to get the input into a visible spot.
 
 ![AlignToInput](https://user-images.githubusercontent.com/82050258/182376886-3a9c605a-99eb-4ee8-b9cb-7f8e7ac5dc8a.gif)
 
@@ -20,8 +20,7 @@ Our package aims to improve the way keyboards and inputs are being handled, givi
   - [Avoidable](#avoidable-1)
     - [Props](#avoidable-props)
   - [Avoidable.Area](#avoidablearea)
-- [Examples](#examples)
-  - [Example App](#example-app)
+- [Example App](#example-app)
 - [Usage](#usage)
   - [Align To Input](#align-to-input)
   - [Align To Input - Context Aware](#align-to-input---context-aware)
@@ -72,29 +71,27 @@ And/or define an area within your Avoidable Component
 
 ### `Avoidable`
 
-This is the main Component, build around a `ScrollView` component, that should wrap the entire screen it is used on. 
+This is the main component, built around a `ScrollView` component, that should wrap the entire screen it is used on. 
 
 #### Avoidable Props
 |Name|Type|Description|
 |--|--|--|
-|alignTo| `String` - `'input'` or `'bottom'` | Determines what gets aligned to the keyboard. If `input`, the focused input will be right above the keyboard. If `bottom`, the last component inside `<Avoidable>` (or inside `<Avoidable.Area>`) will be focused right above the keyboard. Default: `input` |
+|alignTo| `String` - `'input'` or `'bottom'` | Determines what gets aligned to the keyboard. If `input`, the focused input will be right above the keyboard. If `bottom`, the last component inside `<Avoidable>` (or inside `<Avoidable.Area>`) will be positioned right above the keyboard. Default: `input` |
 |contextAware| `Boolean` | If `true`, input will only go above the keyboard if it normally would get covered by the keyboard when opened. Default `true` |
 |containerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView` |
 |keyboardHiddenContainerStyle| [View Style](https://reactnative.dev/docs/view-style-props) | Container Styles passed to the `ScrollView`. Applied only when the keyboard is hidden |
 |scrollViewProps| `Object` - [ScrollView Props](https://reactnative.dev/docs/scrollview#props) | Props passed to the `ScrollView`|
-|safeMarginContentHeight| `Number` | Safe Margin to determine if content fits between top of screen and keyboard. `contentHeight` is the height of the elements that are withing the `<Avoidable>` or `<Avoidable.Area>` tags. You might want to fine-tune this so by changing the `safeMarginContentHeight` you can add or subtract from it. Default `0` |
+|safeMarginContentHeight| `Number` | `safeMarginContentHeight` is the adjustment to the height of the elements that you want to align when determining if the content fits between the keyboard and the top of the screen. This is important when aligning to `bottom` but, the content does not fit, it will automatically align to `input`. Default `0` |
 |safeMarginBottom| `Number` | `safeMarginBottom` is the distance between the keyboard and the desired element that it gets aligned to. If you want to leave some space between the keyboard and your input or form change this. Default `0` |
 
 ### `Avoidable.Area`
 
-Only when `contextAware = true` and `alignTo = 'bottom'` must an Area be defined in order for the package to work properly. This is the component to specify where your form or selection of inputs is.
+Only when `contextAware = true` and `alignTo = 'bottom'` an Area must be defined in order for the package to work properly. This component specifies the components/inputs that should avoid the keyboard.
 
-## Examples
+## Example App
 
-### Example App
-
-Our example app includes all the basic use cases of our component.
-You can run the example app by cloning our repo and following these steps:
+The example app includes all the basic use cases of our component.
+You can run the example app by cloning the repo and following these steps:
 
 ```shell
 cd example
