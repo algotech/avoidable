@@ -67,8 +67,8 @@ describe('getItemPosition', () => {
       true,
       MockLayoutMapWithoutArea,
       MockFocusedField,
-      true,
-    )).toEqual(0);
+      false,
+    )).toEqual(1270);
   });
 
   test('Get Item Position with AlignTo Input', () => {
@@ -77,8 +77,8 @@ describe('getItemPosition', () => {
       true,
       MockLayoutMapWithoutArea,
       MockFocusedField,
-      true,
-    )).toEqual(0);
+      false,
+    )).toEqual(645);
   });
 
   test('Get Item Position with AlignTo Bottom but does not fit screen', () => {
@@ -93,6 +93,13 @@ describe('getItemPosition', () => {
 });
 
 describe('checkScreenFit', () => {
+  test('Check if content fits screen', () => {
+    expect(checkScreenFit(
+      508,
+      240,
+    )).toBeTruthy();
+  });
+
   test('Check if content fits screen', () => {
     expect(checkScreenFit(
       508,
