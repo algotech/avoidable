@@ -1,5 +1,5 @@
 import { Avoidable } from './Avoidable';
-import { Area } from './AvoidableArea';
+import { Area } from './Area';
 
 Avoidable.Area = Area;
 

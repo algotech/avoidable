@@ -45,7 +45,7 @@ const Avoidable = ({
   const { height: safeAreaHeight } = useSafeAreaFrame();
 
   if (!children && __DEV__) {
-    throw new Error('Please add at least one element between the Avoidable tags.');
+    throw new Error('Please add at least one child to Avoidable.');
   }
 
   const getKeyboardHeight = (e) => {
@@ -97,7 +97,7 @@ const Avoidable = ({
       safeAreaHeight;
 
     if (hasArea && (alignTo !== 'bottom' || !contextAware) && __DEV__) {
-      console.warn(`You have defined an Area, but alignTo is not set to 'bottom' and contextAware is not set to true!`);
+      console.warn(`When Area is used, alignTo must be "bottom" and contextAware must be true.`);
     }
 
     if (hasArea) {
