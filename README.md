@@ -1,4 +1,5 @@
 # Avoidable
+![test status](https://github.com/algotech/avoidable/actions/workflows/main.yml/badge.svg)
 
 Avoidable is a custom package to handle Keyboard interaction with `TextInputs`
 
