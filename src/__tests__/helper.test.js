@@ -1,4 +1,3 @@
-
 import { getContentHeight, getItemPosition, checkScreenFit } from '../helper';
 
 const MockLayoutMapWithArea = {
@@ -21,7 +20,7 @@ const MockFocusedField = 1;
 
 const MockSafeMarginContentHeight = 70;
 
-describe('Testing of Avoidable helper functions', () => {
+describe('getContentHeight', () => {
   test('Get Content Height without Area', () => {
     expect(getContentHeight(
       MockLayoutMapWithoutArea,
@@ -39,7 +38,9 @@ describe('Testing of Avoidable helper functions', () => {
       true,
     )).toEqual(150);
   });
+})
 
+describe('getItemPosition', () => {
   test('Get Item Position with Area and AlignTo Bottom', () => {
     expect(getItemPosition(
       'bottom',
@@ -89,7 +90,9 @@ describe('Testing of Avoidable helper functions', () => {
       true,
     )).toEqual(0);
   });
+});
 
+describe('checkScreenFit', () => {
   test('Check if content fits screen', () => {
     expect(checkScreenFit(
       508,

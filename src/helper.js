@@ -23,17 +23,17 @@ export const getItemPosition = (
 ) => {
   if (hasArea) {
     return Object.values(layoutMap).filter(view => view.isArea)[0]?.y +
-    Object.values(layoutMap).filter(view => view.isArea)[0]?.height || 0;
+      Object.values(layoutMap).filter(view => view.isArea)[0]?.height || 0;
   }
 
   if (alignTo === 'bottom' && doesFitScreen) {
     return layoutMap[Object.keys(layoutMap).length - 1]?.y +
-    layoutMap[Object.keys(layoutMap).length - 1]?.height || 0;
+      layoutMap[Object.keys(layoutMap).length - 1]?.height || 0;
   }
 
   if (alignTo === 'input' || !doesFitScreen) {
     return layoutMap[focusedField]?.y +
-    layoutMap[focusedField]?.height || 0;
+      layoutMap[focusedField]?.height || 0;
   }
 };
 
