@@ -20,6 +20,7 @@ This package aims to improve the way keyboards and inputs are being handled, giv
   - [Avoidable](#avoidable-1)
     - [Props](#avoidable-props)
   - [Avoidable.Area](#avoidablearea)
+- [Dependencies](#dependencies)
 - [Example App](#example-app)
 - [Usage](#usage)
   - [Align To Input](#align-to-input)
@@ -87,6 +88,12 @@ This is the main component, built around a `ScrollView` component, that should w
 ### `Avoidable.Area`
 
 Only when `contextAware = true` and `alignTo = 'bottom'` an Area must be defined in order for the package to work properly. This component specifies the components/inputs that should avoid the keyboard.
+
+## Dependencies
+
+`react-native-safe-area-context`
+
+Having `react-native-safe-area-context` as a dependency also means you will have to define a `SafeAreaProvider` in order for this to work. More details [here](https://github.com/th3rdwave/react-native-safe-area-context#safeareaprovider).
 
 ## Example App
 
