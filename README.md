@@ -1,4 +1,4 @@
-# Avoidable
+# @algotech-software/Avoidable
 ![test status](https://github.com/algotech/avoidable/actions/workflows/node.js.yml/badge.svg?event=push)
 [![codecov](https://codecov.io/gh/algotech/avoidable/branch/main/graph/badge.svg?token=DZCMNUMMW9)](https://codecov.io/gh/algotech/avoidable)
 
@@ -35,11 +35,11 @@ This package aims to improve the way keyboards and inputs are being handled, giv
 Installation can be done through `npm`:
 
 ```shell
-npm install avoidable
+npm install @algotech-software/avoidable
 ```
  or `yarn`:
 ```shell
-yarn add avoidable
+yarn add @algotech-software/avoidable
 ```
 
 ## Quick Start
