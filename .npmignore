@@ -1,0 +1,5 @@
+.github
+example
+node_modules
+coverage
+*.tgz

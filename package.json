@@ -1,5 +1,5 @@
 {
-  "name": "avoidable",
+  "name": "@algotech-software/avoidable",
   "version": "1.0.0",
   "description": "React Native Keyboard Aware component",
   "main": "index.js",
