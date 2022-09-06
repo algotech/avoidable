@@ -44,6 +44,12 @@ yarn add @algotech-software/avoidable
 
 ## Quick Start
 
+Import the components
+
+```javascript
+import { Avoidable } from '@algotech-software/avoidable';
+```
+
 Wrap your screen with the Avoidable Component
 
 ```javascript
@@ -105,8 +111,19 @@ You can run the example app by cloning the repo and following these steps:
 ```shell
 cd example
 npm install
-cd ios && pod install # only on iOS
-cd .. && npx react-native run-ios
+```
+
+IOS
+```shell
+cd ios
+pod install 
+cd ..
+npx react-native run-ios
+```
+
+Android
+```shell
+npx react-native run-android
 ```
 
 ## Usage

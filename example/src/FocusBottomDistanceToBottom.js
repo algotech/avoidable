@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { Avoidable } from '@algotech-software/avoidable';
 
-import Avoidable from '../Avoidable';
+// import Avoidable from '../Avoidable';
 import Button from './Button';
 
 export default function FocusBottomScreen() {
