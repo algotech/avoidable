@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
+import { Avoidable } from '@algotech-software/avoidable';
 
-import Avoidable from '../Avoidable';
+// import Avoidable from '../Avoidable';
 import Button from './Button';
 
 const styles = StyleSheet.create({
